@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% load static %} {% block content %}
+
+<div class="feed">
+  <div class="post">
+    <div class="post__avatar">
+        <img src="{{object.author.profile.image.url}}" alt="" />
+      </div>
+    <div class="post__body">
+      <div class="post__header">
+        <div class="post_headerText">
+            <h3>{{object.author.first_name}} {{object.author.last_name}}</h3>
+            <p>@{{object.author}}</p>
+          </div>
+        <div class="post__headerDescription">
+            <p>{{object.content}}</p>
+            <div class="img">
+                {% if object.image %}
+            <img
+            src="{{object.image.url}}"
+            alt=""
+            />
+            {%endif%}
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+  <div class="AskQuestion">
+    <div class="questionbox">
+  <form method="POST" enctype="multipart/form-data">
+    {%csrf_token%}
+    <fieldset class="form-group" style="padding-left:10px ;">
+      <h2 style="text-align: center;">Are you sure you want to delete the post?</h2>
+    </fieldset>
+    <button class="delete__button" type="submit">Delete</button>
+    <button class="questionbox__button"><a href="{%url 'post-detail' object.id%}"style="color: inherit; text-decoration: none;">Cancel</a></button>
+  </form>
+  </div>
+  </div>
+</div>
+{% endblock content %}
+
+

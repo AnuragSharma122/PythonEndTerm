@@ -1,0 +1,79 @@
+{% extends 'base.html'%} 
+{% load crispy_forms_tags %}
+{% load static %} {% block content %}
+
+<div class="feed">
+  <div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-7">
+            <div class="card p-3 py-4">
+                <div class="text-center"> <img src="{{user.profile.image.url}}" width="100" class="rounded-circle"> </div>
+                <div class="text-center mt-3">
+                    <h5 class="mt-2 mb-0">{{user.first_name}} {{ user.last_name}}</h5> <span>@{{user.username}}</span>
+                    <div class="px-4 mt-1">
+                        <p class="fonts">Bio: {{user.profile.bio}}</p>
+                    </div>
+                    <div class="px-4 mt-1">
+                      <p class="fonts">Email: {{user.email}}</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="AskQuestion">
+  <div class="questionbox">
+<form method="POST" enctype="multipart/form-data">
+  {%csrf_token%}
+  <fieldset class="form-group" style="padding-left:10px ;">
+    {{u_form|crispy}}
+    {{p_form|crispy}}
+  </fieldset>
+  <button class="questionbox__button">Update</button>
+</form>
+</div>
+</div>
+<div class="posts">
+    {% for post in posts%}
+
+    <div class="post">
+      <div class="post__avatar">
+        <img src="{{post.author.profile.image.url}}" alt="" />
+      </div>
+      <div class="post__body">
+        <div class="post__header">
+          <div class="post_headerText">
+            <h3>{{post.author.first_name}} {{post.author.last_name}}</h3>
+            <p>@{{post.author}}</p>
+          </div>
+          <div class="username">
+          </div>
+          <div class="post__headerDescription">
+            <p>{{post.content}}</p>
+            <div class="img">
+                {% if post.image %}
+            <img
+            src="{{post.image.url}}"
+            alt=""
+            />
+            {%endif%}
+            </div>
+          </div>
+          {% if user.is_authenticated %}
+          <div class="post__footer">
+            <button class="btn"><i class="fa fa-thumbs-up"></i></button>
+            <button class="btn"><i class="fa fa-thumbs-down"></i></button>
+            <button class="btn"><i class="fa fa-comments"></i></button>
+            <button class="btn"><i class="fa fa-edit"></i></button>
+          </div>
+          {%endif%}
+        </div>
+        <p>{{post.date_posted}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock content %}

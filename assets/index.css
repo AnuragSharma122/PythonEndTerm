@@ -1,0 +1,190 @@
+.App{
+    display: flex;
+    height: 100vh;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+.sidebar{
+    border-right: 1px solid grey;
+    flex: 0.2;
+    /* min-width: 250px; */
+    margin-top: 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    justify-content: center;
+}
+#SidebarComponent{
+    display: flex;
+    align-items: center;
+    /* padding-left: 22px; */
+    cursor: pointer;
+}
+.material-icons{
+    color: #00acee;
+    font-size: 25px !important;
+    margin-left: 20px !important;
+    margin-bottom: 20px !important;
+    padding-top: 21px;
+    padding-left: 20px;
+
+}
+#SidebarComponent:hover{
+    background-color: #e8f5fe;
+    border-radius: 30px;
+    color: #00acee;
+    transform: color 100ms ease-out;
+}
+#SidebarComponent > .MuiSvgIcon-root{
+    padding: 20px;
+}
+#SidebarComponent > h2{
+    font-weight: 800;
+    font-size: 20px;
+    margin-right: 20px;
+}
+.feed{
+    flex: 0.6;
+    border-right: 1px solid grey;
+    /* min-width:fit-content; */
+    overflow-y: scroll;
+}
+.feed::-webkit-scrollbar{
+    display: none;
+}
+.feed__header{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border: 1px solid grey;
+    padding-left: 15px;
+}
+.feed__header > h2{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.questionbox{
+    padding-bottom: 10px;
+    border-bottom: 8px solid lightgrey;
+    padding-right: 10px;
+}
+
+.questionbox > form{
+    display: flex;
+    flex-direction: column;
+}
+
+.questionbox__input{
+    padding: 20px;
+    display: flex;
+}
+.questionbox__input > input{
+    flex: 1;
+    margin-left: 20px;
+    font-size: 20px;
+    border:none;
+    outline: none;
+}
+.questionbox__fileUpload{
+    border:none;
+    padding-left: 20px;
+
+}
+.questionbox__button{
+    background-color:#00acee !important;
+    border:none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    width: 80px;
+    height: 40px !important;
+    margin-top: 20px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.post{
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    padding-bottom: 10px;
+    /* padding-top: 10px; */
+}
+.post__avatar{
+    padding: 15px;
+}
+.post__avatar > img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.post_headerText{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.username{
+    display: flex;
+    align-items: center;
+}
+.post_headerText >p{
+    color: gray;
+}
+.username>p{
+    color: gray;
+}
+.post__header > img{
+    border-radius: 20px;
+}
+.post__footer{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.post__headerDescription >p{
+    font-size: 1.3rem;
+}
+
+@media only screen and (max-width:700px) {
+    .feed{
+        flex: 0.78;
+    }
+    .sidebar{
+        flex:0.2;
+    }
+    #SidebarComponent > h2{
+        display: none;
+    }
+    .post__avatar > img{
+        width: 30px;
+        height: 30px;
+    }
+}
+@media only screen and (max-width:700px) {
+    .post__header > img{
+        width: 100%;
+    }
+}
+@media only screen and (max-width:700px) {
+    .SidebarComponent >h2{
+        display: none;
+    }
+}
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  

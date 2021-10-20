@@ -1,0 +1,21 @@
+{% extends 'base.html'%} {% load static %} {% block content %}
+
+<div class="feed">
+  <div class="AskQuestion">
+    <div class="questionbox">
+      <form>
+        <div class="questionbox__input">
+          <div class="post__avatar">
+            <img src="{% static 'img.jpg'%}" alt="" />
+          </div>
+          <input type="text" placeholder="Ask a question!" />
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="inputGroupFile02">
+        </div>          
+        <button class="questionbox__button">Ask</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

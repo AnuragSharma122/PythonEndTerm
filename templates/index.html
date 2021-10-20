@@ -1,0 +1,95 @@
+{% extends 'base.html'%} {% load static %} {% block content %}
+
+<div class="feed">
+  <!-- <div class="feed__header">
+    <h1>Social Media App</h1>
+  </div> -->
+  <!-- {% static 'img.jpg'%} -->
+  {% if user.is_authenticated %}
+  <div class="AskQuestion">
+    <div class="questionbox">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token%}
+        <div class="questionbox__input">
+          <div class="post__avatar">
+            <img src="{{user.profile.image.url}}" alt="" />
+          </div>
+          <input type="text" placeholder="Create a Post" name="content" />
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" style=" text-align: center;" class="form-control" id="inputGroupFile02" name="image">
+        </div>          
+        <button class="questionbox__button">Post</button>
+      </form>
+    </div>
+  </div>
+  {%endif%}
+  
+
+  <div class="posts">
+    {% for post in posts%}
+    
+    <div class="post">
+      <div class="post__avatar">
+        <img src="{{post.author.profile.image.url}}" alt="" />
+      </div>
+      <div class="post__body">
+        <div class="post__header">
+          <div class="post_headerText">
+            <h3>{{post.author.first_name}} {{post.author.last_name}}</h3>
+            <p>@{{post.author}}</p>
+          </div>
+          <a class="postdetail" href="{%url 'post-detail' post.id%}" style="color: inherit; text-decoration: none;">
+          <div class="post__headerDescription">
+            <p>{{post.content}}</p>
+            <div class="img">
+                {% if post.image %}
+            <img
+            src="{{post.image.url}}"
+            alt=""
+            />
+            {%endif%}
+            </div>
+          </div>
+          </a>
+          {% if user.is_authenticated %}
+          <div class="post__footer">
+
+            <form action="{%url 'LikePost' post.pk%}" method="POST">
+              {%csrf_token%}
+            <button class="btn" type="submit" name="like" value="{{post.id}}" >
+              {{ post.likes.count }}
+              {% if post_is_liked %}
+              <i class="fa fa-thumbs-up" style="color: blue;"></i>
+              {% else %}
+              <i class="fa fa-thumbs-up"></i>
+              {% endif %}
+            </button>
+            </form>
+
+
+
+            <a class="postdetail" href="" style="color: inherit; text-decoration: none;">
+              <button class="btn"><i class="fa fa-comments"></i></button>
+            </a>
+            {% if post.author.username == user.username%}
+            <a class="postdetail" href="{%url 'post-update' post.id%}" style="color: inherit; text-decoration: none;">
+              <button class="btn"><i class="fa fa-edit"></i></button>
+            </a>
+            
+            <a class="postdetail" href="{%url 'post-delete' post.id%}" style="color: inherit; text-decoration: none;">
+              <button class="btn"><i class="fa fa-trash"></i></button>
+            </a>
+            {%endif%}
+          </div>
+          {%endif%}
+        </div>
+        <p>{{post.date_posted}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
+
+

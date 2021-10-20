@@ -1,0 +1,27 @@
+{% extends 'base.html'%} 
+{% load crispy_forms_tags %}
+{% load static %} {% block content %}
+
+<div class="feed">
+    {% if messages%}
+        {%for message in messages%}
+          {{message}}
+        {%endfor%}
+    {%endif%}
+  <div class="AskQuestion">
+  <div class="login">
+    <div class="questionbox">
+      <form method="POST">
+        {%csrf_token%}
+        
+        <fieldset class="form-group" style="padding-left:10px ;">
+          {{form|crispy}}
+        </fieldset>
+        <button class="questionbox__button">Log in</button>
+      </form>
+    </div>
+  </div>
+    </div>
+  </div>
+
+{% endblock content %}

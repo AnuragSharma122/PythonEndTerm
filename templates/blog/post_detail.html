@@ -1,0 +1,110 @@
+{% extends 'base.html'%} {% load static %} {% block content %}
+
+<div class="feed">
+  <div class="posts">
+    <div class="post">
+      <div class="post__avatar">
+        <img src="{{object.author.profile.image.url}}" alt="" />
+      </div>
+      <div class="post__body">
+        <div class="post__header">
+          <div class="post_headerText">
+            <h3>{{object.author.first_name}} {{object.author.last_name}}</h3>
+            <p>@{{object.author}}</p>
+          </div>
+          
+          <div class="post__headerDescription">
+            <p>{{object.content}}</p>
+            <div class="img">
+                {% if object.image %}
+            <img
+            src="{{object.image.url}}"
+            alt=""
+            />
+            {%endif%}
+            </div>
+          </div>
+          {% if user.is_authenticated %}
+          <div class="post__footer">
+            
+            {% if post_is_liked %}
+            <button class="btn" style="color: blue;">{{ number_of_likes }}<i class="fa fa-thumbs-up" "></i></button>
+            {% else %}
+            <button class="btn">{{ number_of_likes }}<i class="fa fa-thumbs-up"></i></button>
+            {% endif %}
+            <button class="btn"><i class="fa fa-comments"></i></button>
+            {% if object.author.username == user.username%}
+            <a class="postdetail" href="{%url 'post-update' post.id%}" style="color: inherit; text-decoration: none;">
+            <button class="btn"><i class="fa fa-edit"></i></button>
+            </a>
+            {%endif%}
+          </div>
+          {%endif%}
+        </div>
+        <p>{{post.date_posted}}</p>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row bootstrap snippets bootdeys">
+          <div class="col-md-8 col-sm-12">
+              <div class="comment-wrapper">
+                  <div class="panel panel-info">
+                      <div class="panel-heading">
+                          Comment panel
+                      </div>
+                      
+                      <div class="panel-body">
+                        <form action="" method="post">
+                          {%csrf_token%}
+                          {{form}}
+                          <hr>
+
+                        </form>
+                          {% if not post.comments.all %}
+                          <ul class="media-list">
+                            
+                          <h2>No comments yet</h2>
+                          </ul>
+                          {%else%}
+                          
+                            {%for comment in post.comments.all %}
+                            <ul class="media-list">
+                            <li class="media">
+                              <a href="#" class="pull-left">
+                                  <img src="{{comment.author.profile.image.url}}" style="width: 50px; border-radius:50%;
+                                  " alt="" />
+                              </a>
+                              <div class="media-body"
+                              style="
+                              padding-left:60px;
+                              ">
+                                  <span class="text-muted pull-right">
+                                      <small class="text-muted">{{comment.date_added}}</small>
+                                  </span>
+                                  <strong class="text-success">@{{comment.author.username}}</strong>
+                                  <p>
+                                    {{comment.body}}
+                                  </p>
+                              </div>
+                            </li>
+                            <br>
+                          </ul>
+                            {%endfor%}
+                          
+                          {%endif%}
+                      </div>
+                  </div>
+              </div>
+      
+          </div>
+      </div>
+      </div>
+
+
+  </div>
+</div>
+{% endblock content %}
+
+
